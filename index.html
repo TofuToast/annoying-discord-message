@@ -11,7 +11,7 @@
 		</style>
 		<script type="text/javascript">
 			// thanks to MrEgggga for making by code better :p
-			function answer() {
+			function convertText() {
 				let sentence= document.getElementById("input1").value
 				if(sentence=='') {
 					document.getElementById("output").innerHTML="Please type something in the box.";
@@ -21,7 +21,7 @@
 					document.getElementById("output").innerHTML = converted;
 				}
 			}
-			function copy() {
+			function copyToClipboard() {
 				let converted = document.getElementById('output').textContent;
 				navigator.clipboard.writeText(converted);
 			}
@@ -35,11 +35,11 @@
 			<nobr>
 				<p>Put text here ↓</p>
 				<input id="input1" placeholder="input" type="text"><br>
-				<button onclick="answer()"id="btn1">get output.</button>
+				<button onclick="convertText()"id="btn1">get output.</button>
 			</nobr>
 		
 			<p>output: <span id="output"></span></p>
-			<button id="copytxt" onclick="copy()">copy</button>
+			<button id="copytxt" onclick="copyToClipboard()">copy</button>
 		</div>
 		
 	</body>
