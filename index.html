@@ -7,7 +7,7 @@
 			#button { font-size: 10px; }
 			.center { text-align: center; }
 			#heading { font-family:"Monaco", "Lucida Console",monospace; }
-			#output { font-size: 18px }
+			#output { font-size: 18px; white-space: normal; }
 		</style>
 		<script type="text/javascript">
 			function range(min, max, step = 1) {
@@ -74,7 +74,7 @@
 		
 			<p>output: <span id="output"></span></p>
 			<button id="copytxt" onclick="copyToClipboard()">copy</button>
-
+			
 			<script type="text/javascript">
 				const buttonContainer = document.getElementById('conv-buttons');
 
