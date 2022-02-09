@@ -82,6 +82,7 @@
 					const button = document.createElement('BUTTON');
 					button.addEventListener('click', () => {
 						selectedConverter = i;
+						convertText();
 					});
 					button.textContent = converters[i].name;
 					buttonContainer.appendChild(button);
