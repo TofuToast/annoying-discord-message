@@ -4,28 +4,57 @@
 		<title>apod</title>
 		<meta charset="utf-8">
 		<style>
-			#button{font-size: 10px;}
-			.center{text-align: center;}
-			#heading{font-family:"Monaco", "Lucida Console",monospace;}
-			#outputs{font-size: 18px}
+			#button { font-size: 10px; }
+			.center { text-align: center; }
+			#heading { font-family:"Monaco", "Lucida Console",monospace; }
+			#output { font-size: 18px }
 		</style>
 		<script type="text/javascript">
-			<!-- thanks to MrEgggga for making by code better :p-->
-			function answer() {
-				let sentence= document.getElementById("input1").value
-				if(sentence=='') {
-					document.getElementById("outputs").innerHTML="Please type something in the box.";
+			function range(min, max, step = 1) {
+				return [...Array(
+					Math.ceil((max - min) / step)
+				).keys()]
+					.map(n => n * step + min);
+			}
+
+			const diacritics = range(0x0300, 0x034A).map(String.fromCharCode).map(s => s.slice(0, 1));
+
+			let converters = [
+				{
+					name: 'spoilers', 
+					convert: s => s.split('').map(s => `||${s}||`).join('')
+				},
+				{
+					name: 'word spoilers',
+					convert: s => s.split(/ +/).map(s => `||${s}||`).join(' ')
+				},
+				{
+					name: 'zalgo',
+					convert: s => s.split('').map(s => {
+						const added = [];
+						for(let i = 0; i < 10; ++i) {
+							added.push(diacritics[Math.floor(Math.random() * diacritics.length)]);
+						}
+						return `${added.join('')}${s}`;
+					}).join('')
+				}
+			];
+
+			let selectedConverter = 0;
+
+			// thanks to MrEgggga for making by code better :p
+			function convertText() {
+				let sentence = document.getElementById("input1").value;
+				if(sentence == '') {
+					document.getElementById("output").innerHTML="Please type something in the box.";
 				}
 				else {
-					const converted = sentence.split('').map(s => `||${s}||`).join('');
-					document.getElementById("outputs").innerHTML="output: " + converted;
+					const converted = converters[selectedConverter].convert(sentence);
+					document.getElementById("output").innerHTML = converted;
 				}
 			}
-			function copy() {
-				let sentence= document.getElementById("input1").value
-				let converted = sentence.split('').map(s => `||${s}||`).join('');
-				copyText.select();
-				copyText.setSelectionRange(0, 99999); 
+			function copyToClipboard() {
+				let converted = document.getElementById('output').textContent;
 				navigator.clipboard.writeText(converted);
 			}
 		</script>
@@ -33,19 +62,32 @@
 	<body>
 		<div class="center">
 			<h2 id="heading"> a.p.o.d. annoy people on discord</h2>
-<!--hide every letter function-->
+
+			<div>Annoyance method: <span id="conv-buttons"></span></div>
 		
 			<h3>input your text and copy</h3>
-		<nobr>
-			<p>Put text here ↓</p>
-			<input id="input1" placeholder="input" type="text"><br>
-			<button onclick="answer()"id="btn1">get output.</button>
-		</nobr>
+			<nobr>
+				<p>Put text here ↓</p>
+				<input id="input1" placeholder="input" type="text"><br>
+				<button onclick="convertText()"id="btn1">get output.</button>
+			</nobr>
 		
-			<p id="outputs">output: </p>
-		<!--
-		<button id="copytxt" onclick="copy()">copy</button>
-		-->
+			<p>output: <span id="output"></span></p>
+			<button id="copytxt" onclick="copyToClipboard()">copy</button>
+
+			<script type="text/javascript">
+				const buttonContainer = document.getElementById('conv-buttons');
+
+				for(let i = 0; i < converters.length; ++i) {
+					const button = document.createElement('BUTTON');
+					button.addEventListener('click', () => {
+						selectedConverter = i;
+						convertText();
+					});
+					button.textContent = converters[i].name;
+					buttonContainer.appendChild(button);
+				}
+			</script>
 		</div>
 		
 	</body>
