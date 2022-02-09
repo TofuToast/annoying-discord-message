@@ -10,6 +10,34 @@
 			#output { font-size: 18px }
 		</style>
 		<script type="text/javascript">
+			function range(min, max, step = 1) {
+				return [...Array(
+					Math.ceil((max - min) / step)
+				).keys()]
+					.map(n => n * step + min);
+			}
+
+			const diacritics = range(0x0300, 0x034A).map(String.fromCharCode).map(s => s.slice(0, 1));
+
+			let converters = [
+				{
+					name: 'spoilers', 
+					convert: s => s.split('').map(s => `||${s}||`).join('')
+				},
+				{
+					name: 'zalgo',
+					convert: s => s.split('').map(s => {
+						const added = [];
+						for(let i = 0; i < 10; ++i) {
+							added.push(diacritics[Math.floor(Math.random() * diacritics.length)]);
+						}
+						return `${added.join('')}${s}`;
+					}).join('')
+				}
+			];
+
+			let selectedConverter = 0;
+
 			// thanks to MrEgggga for making by code better :p
 			function convertText() {
 				let sentence = document.getElementById("input1").value;
@@ -17,7 +45,7 @@
 					document.getElementById("output").innerHTML="Please type something in the box.";
 				}
 				else {
-					const converted = sentence.split('').map(s => `||${s}||`).join('');
+					const converted = converters[selectedConverter].convert(sentence);
 					document.getElementById("output").innerHTML = converted;
 				}
 			}
@@ -30,6 +58,8 @@
 	<body>
 		<div class="center">
 			<h2 id="heading"> a.p.o.d. annoy people on discord</h2>
+
+			<div>Annoyance method: <span id="conv-buttons"></span></div>
 		
 			<h3>input your text and copy</h3>
 			<nobr>
@@ -40,6 +70,19 @@
 		
 			<p>output: <span id="output"></span></p>
 			<button id="copytxt" onclick="copyToClipboard()">copy</button>
+
+			<script type="text/javascript">
+				const buttonContainer = document.getElementById('conv-buttons');
+
+				for(let i = 0; i < converters.length; ++i) {
+					const button = document.createElement('BUTTON');
+					button.addEventListener('click', () => {
+						selectedConverter = i;
+					});
+					button.textContent = converters[i].name;
+					buttonContainer.appendChild(button);
+				}
+			</script>
 		</div>
 		
 	</body>
