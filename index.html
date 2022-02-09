@@ -25,6 +25,10 @@
 					convert: s => s.split('').map(s => `||${s}||`).join('')
 				},
 				{
+					name: 'word spoilers',
+					convert: s => s.split(/ +/).map(s => `||${s}||`).join(' ')
+				},
+				{
 					name: 'zalgo',
 					convert: s => s.split('').map(s => {
 						const added = [];
