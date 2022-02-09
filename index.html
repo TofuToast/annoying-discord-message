@@ -10,22 +10,19 @@
 			#outputs{font-size: 18px}
 		</style>
 		<script type="text/javascript">
-			<!-- thanks to MrEgggga for making by code better :p-->
+			// thanks to MrEgggga for making by code better :p
 			function answer() {
 				let sentence= document.getElementById("input1").value
 				if(sentence=='') {
-					document.getElementById("outputs").innerHTML="Please type something in the box.";
+					document.getElementById("output").innerHTML="Please type something in the box.";
 				}
 				else {
 					const converted = sentence.split('').map(s => `||${s}||`).join('');
-					document.getElementById("outputs").innerHTML="output: " + converted;
+					document.getElementById("output").innerHTML = converted;
 				}
 			}
 			function copy() {
-				let sentence= document.getElementById("input1").value
-				let converted = sentence.split('').map(s => `||${s}||`).join('');
-				copyText.select();
-				copyText.setSelectionRange(0, 99999); 
+				let converted = document.getElementById('output').textContent;
 				navigator.clipboard.writeText(converted);
 			}
 		</script>
@@ -33,19 +30,16 @@
 	<body>
 		<div class="center">
 			<h2 id="heading"> a.p.o.d. annoy people on discord</h2>
-<!--hide every letter function-->
 		
 			<h3>input your text and copy</h3>
-		<nobr>
-			<p>Put text here ↓</p>
-			<input id="input1" placeholder="input" type="text"><br>
-			<button onclick="answer()"id="btn1">get output.</button>
-		</nobr>
+			<nobr>
+				<p>Put text here ↓</p>
+				<input id="input1" placeholder="input" type="text"><br>
+				<button onclick="answer()"id="btn1">get output.</button>
+			</nobr>
 		
-			<p id="outputs">output: </p>
-		<!--
-		<button id="copytxt" onclick="copy()">copy</button>
-		-->
+			<p>output: <span id="output"></span></p>
+			<button id="copytxt" onclick="copy()">copy</button>
 		</div>
 		
 	</body>
