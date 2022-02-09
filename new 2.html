@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<title>apod</title>
+		<meta charset="utf-8">
+		<style>
+			#button{font-size: 10px;}
+		</style>
+		<script type="text/javascript">
+			function answer() {
+				let sentence= document.getElementById("input1").value
+				if(sentence=='') {
+					document.getElementById("outputs").innerHTML="Please type something in the box.";
+				}
+				else {
+					const converted = sentence.
+						split('')
+						.map(s => `||${s}||`)
+						.join('');
+					document.getElementById("outputs").innerHTML="output: " + converted;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<h2> a.p.o.d. annoy people on discord</h2>
+		<h3>input your text and copy</h3>
+		<nobr>
+			<p>Put text here ↓</p>
+			<input id="input1" placeholder="input" type="text"><br>
+			<button onclick="answer()"id="btn1">get output.</button>
+		</nobr>
+		<h3 id="outputs">output: </h3>
+	</body>
+</html>
+<!--CODIG-->
