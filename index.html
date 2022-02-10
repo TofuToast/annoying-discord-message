@@ -10,10 +10,7 @@
 			#output { font-size: 18px }
 		</style>
 		<script type="text/javascript">
-			const input = document.getElementById("input1");
-			const output = document.getElementById("output");
-			const maxLen = document.getElementById("maxLen");
-			const alerts = document.getElementById("alert");
+			const els = { };
 			
 			function range(min, max, step = 1) {
 				return [...Array(
@@ -49,7 +46,7 @@
 
 			// thanks to MrEgggga for making by code better :p
 			function convertText() {
-				const sentence = input.value;
+				const sentence = els.input.value;
 				let alertMsg = null;
 				if(sentence == '') {
 					alertMsg = "Please type something in the box.";
@@ -61,8 +58,8 @@
 					alertMsg = "Message was too long.";
 				}
 
-				output.innerHTML = converted;
-				alerts.innerHTML = alertMsg || '';
+				els.output.innerHTML = converted;
+				els.alerts.innerHTML = alertMsg || '';
 			}
 			function copyToClipboard() {
 				let converted = document.getElementById('output').textContent;
@@ -88,7 +85,11 @@
 			<button id="copytxt" onclick="copyToClipboard()">copy</button>
 
 			<script type="text/javascript">
-				const buttonContainer = document.getElementById('conv-buttons');
+				els.input = document.getElementById("input1");
+				els.output = document.getElementById("output");
+				els.maxLen = document.getElementById("maxLen");
+				els.alerts = document.getElementById("alert");
+				els.buttonContainer = document.getElementById('conv-buttons');
 
 				for(let i = 0; i < converters.length; ++i) {
 					const button = document.createElement('BUTTON');
