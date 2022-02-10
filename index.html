@@ -52,7 +52,7 @@
 					alertMsg = "Please type something in the box.";
 				}
 				const converted = converters[selectedConverter].convert(sentence);
-				const convertedCut = converted.slice(0, maxLen.value || Infinity);
+				const convertedCut = converted.slice(0, els.maxLen.value || Infinity);
 
 				if(converted != convertedCut) {
 					alertMsg = "Message was too long.";
