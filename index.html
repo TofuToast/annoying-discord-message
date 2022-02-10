@@ -39,6 +39,10 @@
 						}
 						return `${s}${added.join('')}`;
 					}).join('')
+				},
+				{
+					name: 'spaced',
+					convert: s => s.split('').map(s => `${s} `)
 				}
 			];
 
