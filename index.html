@@ -7,9 +7,18 @@
 			#button { font-size: 10px; }
 			.center { text-align: center; }
 			#heading { font-family:"Monaco", "Lucida Console",monospace; }
-			#output { font-size: 18px; white-space: normal; }
+			#output { font-size: 18px; white-space: normal;}
+			#bottom{position: absolute;bottom: -20px;left: 0;}
+			#bottom2{position: absolute;bottom: -20px;right: 50px;}
 		</style>
 		<script type="text/javascript">
+			/*will try to do css later
+			function hover(){
+				alert("asf");
+				let text= "Asd";
+				}
+			*/
+			
 			function range(min, max, step = 1) {
 				return [...Array(
 					Math.ceil((max - min) / step)
@@ -37,52 +46,60 @@
 						}
 						return `${added.join('')}${s}`;
 					}).join('')
+				},
+				{
+				 name: 'click roll',
+				 convert: s=> "||̴̫̫̮̰̗̃̀̂̆N̶̨̠͈̮̬̭̱̋̆ë̱̼̖̘͇̯́̀̂̈́v̢̼̣̗̄̑̅̈̀ͅė̴̺͈̤̗͆̍́ͅr̵̡̲̪̼̓́̔̂̀|| ||̶̡̜̺̪͈̝͆́̆g̡̬̹̩̓͆͂̈̌̃ò̵̙̳͇̉͆̎̅̕n̶̴̨̯̄́̄͆̏̕ń̡̨̺̥̺̰̻̆ͅà̸̸͉̩̣͇̊́̀|| ||̺̻͉̗̥̦̇͂͂̈g̴̢̣͈̓́͆̌̄̄ï͉̱̙̬̐̌̎̂̕v̧̛̰̦̙̼̂̅͂ͅe̤̪̳̼̊̅̽̐̑̈́|| ||̶̧͇̯̠̺̄̈̊̚y̸̢̹̗̫̫̲̳̑̇ö̲̥͈̪̭̞̝́̄̕u̶̻̱̼̼̍̌͆̊̍|| ||̼̫̼̖̙̯́̊̽ͅû̢̨̮̩̪̬̺̅̒p̢̮̳̩̞̐̍͂̀̌|| ||̷̶̧̨̨̟̰́̀̊Ń̬̲̙̭̾̀̎̅̇e̫̣̫̮̫͇̿̎̓̀v̶̷̧̖̭̺́̊̊̚é̵̸̛̲̲̭̅̋͂r̴̨̻̹̂̿̊̍̊̓|| ||̘̤̹͉̺͂̀̀̽̿g̮̪̝̪̲̠̿̈̽̾ō̵̵̰̱̘̹̈̈́̃n̴̠̬̼̪̈́̈́̔ͅͅn̵̪̠̝̣̭̓̌̓̚a̹̺̔̇̈́̽̿̚ͅͅ|| ||̴̢̥̬̯̰̣̍̕̚l̺̗͈̘̘̰̯͆̀̌e̷̶̙̬̞̞̓̅̊̂t̷̙̱̲́̾̽̓́̌|| ||̴̡̗̰̟͈̆̋́̇y̰̖̪̻̺̑̏̉̀̚ơ̴̠̰̠̑̊͂̓́u̘̣̪̦̭̟̒̾́̕|| ||̟̤͈̯̙̍̓͆̉̾d̷̡͈̖̯̠̎̄͂̾ờ̷̢̦̘̣̠̰̄w̷̨͈̺̳̰̮̌̀̉ǹ̸̢̲̹̞̜̖̯̐|| ||̴̼̺̳̓̑̒̊̚̚Ň̸̨̥̳̞̜̉̓̄e̷̢̼̯̰̾̆̍̐̚v̧̛̻̣̓̔̍̿̑̕e̡̱̠̼̠̗̅̑̂̕r̨̡͉͈̟͂́̋̏̉|| ||̷̧̻̱̯̼̲̄̽ͅģ̤̲̯̳͉̫̺͆̂ö̘̠̞̼̺́̿̊̊̔ǹ̞̗̺̮̣̍͆́̎n̷̴̰̜̜̤̅̑̾̂a͇̲̞̜͉͆̔̌̽ͅ|| ||͈̯̟̟̳̂̍̋̓̅r̴̬̩̳̀̀̄̆̀̊u̴̦̞̯̬̰̐̔̓ͅn̢̨̛̮̻̎͂̎̄͂|| ||̞̪̣̟̜̫̖̈̀̎à͇̫̫̝̏̉̈̿̓r̡̨̙̞̻̱̝̻̓̌ỏ̷̢̻̞̹̆̽̋̽ȗ̴̧̱̞̩̤̻̅̃n̢̙̏́̅̾̓͂̐̕d̡̼̹̠̐̽̀̿̀̚|| ||̞͈̪̪̺̞̜̿̽̌ḁ̶̛̙͇̪̤̂̓̾ñ̷̡̟̟̙̦̫̪͂ḏ̡̘̠̳̓́̓̇̕|| ||̴̯̤̝̀̎̔̈̀ͅd̜̞̠̱̤͂̋̃́̕ḕ̠̺̗̝̯̮̋̈́s̡̧̖̱͇̮̓̋̌̓e̸̡̡̝̼̞̹̾̒̐r̖̪̯̞̫̦̀̐̔̀t̢̡̪̼̖̭̃̌̇̕|| ||̶̧̟̣͈̰̓́̀ͅy̧̨̲̪̱̽́̃̃̌ǭ̴̸̭̩̐̈́̿̂ù̸̫͉̥̣̲́̂̈|| ||̨̢̧̨̙̻̣̬̋̈Ṇ̸̨̼̺̹́̾̓̈́ȇ̶̙̥̞̌̾̉̽̇v̸̧̖̹̠̟͈͂̔̀ẹ̦̤̺̙̣̆̎ͅͅr̴̷̻̖̘̥̂̍̃̏|| ||̸̵̷̣̣̙̃̒́̾g̵̝̥̲̘̺̅̊̓̏o̷̡̧̲̪̮̍̈̈́̏ņ̸̧̺̻̩́̏́ͅn̵̴̷̬̮̏̓̄̈̔ấ̜͇̤̱̖̠͂̽|| ||̹̱̭̟̜̫̀̇̑ͅm̧̞̮̲̰̒̿̉̉̑a̱̣̫̩̐́̉̑̃̕k̷̢̖̻̦̃́̂̓̚é̸͈̫̠̠̠̫̃̅|| ||̼̼̣͉̫̫̓́̍̇ÿ̸̹̍̌̉̈̌̑̊ó̸̶̡̝̈̀̓̿̍u̴̴̢̬̟͇̓̏̇̈|| ||̶̨̨̻̰̪̫̓̅̽c̴̤̘̩̾̇̅̉͂̚r̨̦̹̱̐̊̓̈́́̕y̶̙̪̤̱̩̰̾̾̿|| ||̖̘̬͈̮̹̦̑̾̄N̵̠̣̝̬̼̹̈́̔̎ĕ̼̗̘̓̎̈́̋̌͆v̪̲̪̱̻̀̀̃́̚e̷̗͈̯̼̫̒̾̌̈́r̵̵̬̹̳̱̞̄̈́̚|| ||̵̧̨̥̦̱̮̓̓ͅğ̞̟̳̤̳̇̔̾̀ó̸̴̡̦̾́̽́ͅń͇͈̞̼̓̌̀̚̕ṉ̷̞̝̲̍̇̀̆̚a̶̷̯̠͉̅̈́̿̈́̾|| ||̷̷̳̥̺̊̓̈́̉̈́ş̦̻̯̩̆̔̀̾̕à̵̘̟̱̆̈̀̓̐y̶̢͉̗̰̖͈̅̌̐|| ||̷̢̗̳̦̾̀̆̂̓g̨̦̭̰̃̌̌̀͂̚ơ̡̭̖̱̮͂̈́̋̕ǫ̸̛̞̲̀́̐̐ͅd̬̭̲̼̰̽̀̈́̿̾b̼̺͇̙̀̀̉̅̓̍ŷ̫̱̹̾̎̂̔̋́è̙̬̱̝̹̥̆̈̉|| ||̴̛̩̪̌̇̕ͅͅͅN̷͈̖̳̄̔̈̿̀̒ȇ̪̙̯͈̙̇̆̔̑v͈̫̱̻̀̈́̉́́̚e̡̗̺̬̹̳̳͉͂̾r̵̵̢̨̨̩̰̲̈̉|| ||̨̞̣̲̗̲̤̈̆̌ǧ͉̩͉̤̔̾̈́̋̚o̵̡̢̮̼̜̻̔̑̄n̴̩̲͉͇̱͈̄̌̅n̡̨̖̞̻̓̊̂͆̀a̡̛̺̮̦̜̎̎̿̀|| ||̦̮̠̂́̀̿̏̈́̚t̠͉̩̯̳́̂̇̊̈́ȩ̝̥̝̑̈́̒̓̊̽l̷̶̨̛̙̓̾̒̑̚ĺ̶̢̛̛̤̥̝̗̦|| ||̡̦̝͇̒̎͂̏̐̑a̧̨̧͉̘̐̀̋̚̕|| ||̸̙̭̫̓̉̈̔̎͂l̨̨̡͉̞̣̳̑̂̃í̴̝̲̹́̑̀̉̓ȩ̷̸̗͂̒̋̾̾̓|| ||̸̡̣͈̓̉́̽̉̿a̸̶̫̟̹̖̠̎́̑n̗̠̝̮̈̇̓̅̆̚ḍ̒̏̔̾̿̏̆̚ͅ|| ||̶̧̱̒̒́̀̾͂ͅh̷̡͉̬͇̑̓̓̈̈ừ̸̷̢̨̠̺̫̫r̡̲̭̣̭̺̎̿̿̐ţ̴̴̝̲̲̲̮̼̚|| ||̶̧̣̥̯̻̜̌̇̉y̛̪̠̳̖̺̪̐̇̅ớ̴̡̦̖̬̎̕̚u||"
 				}
 			];
 
 			let selectedConverter = 0;
 
-			// thanks to MrEgggga for making by code better :p
-			function convertText() {
+			// thanks to MrEgggga for making the code better
+			function convertText(kinput){
 				let sentence = document.getElementById("input1").value;
-				if(sentence == '') {
+				
+				if(sentence == ''&& converters[selectedConverter].name !== "click roll") {
 					document.getElementById("output").innerHTML="Please type something in the box.";
 				}
 				else {
 					const converted = converters[selectedConverter].convert(sentence);
 					document.getElementById("output").innerHTML = converted;
+
 				}
 			}
 			function copyToClipboard() {
 				let converted = document.getElementById('output').textContent;
 				navigator.clipboard.writeText(converted);
+				
 			}
 		</script>
 	</head>
 	<body>
 		<div class="center">
 			<h2 id="heading"> a.p.o.d. annoy people on discord</h2>
-
+			
 			<div>Annoyance method: <span id="conv-buttons"></span></div>
-		
 			<h3>input your text and copy</h3>
+			
 			<nobr>
 				<p>Put text here ↓</p>
-				<input id="input1" placeholder="input" type="text"><br>
+				<input id="input1" placeholder="input" type="text" <!--onkeydown='converttText(this)'--><br>
+				
 				<button onclick="convertText()"id="btn1">get output.</button>
 			</nobr>
-		
 			<p>output: <span id="output"></span></p>
-			<button id="copytxt" onclick="copyToClipboard()">copy</button>
 			
+			<button id="copytxt" onclick="copyToClipboard()" onmouseover='hover()'>copy</button>
+			
+			<h6 id="bottom"><strong><em>we are not responsible for anything caused by the website</em></strong></h6>
+			<h6 id='bottom2'>credits: mintytoast, Mregggga</h6>
 			<script type="text/javascript">
 				const buttonContainer = document.getElementById('conv-buttons');
-
 				for(let i = 0; i < converters.length; ++i) {
 					const button = document.createElement('BUTTON');
 					button.addEventListener('click', () => {
 						selectedConverter = i;
-						convertText();
 					});
 					button.textContent = converters[i].name;
 					buttonContainer.appendChild(button);
@@ -92,4 +109,4 @@
 		
 	</body>
 </html>
-<!--CODIG-->
+<!--codng-->
