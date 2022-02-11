@@ -12,6 +12,8 @@
 			#bottom2{position: absolute;bottom: -20px;right: 50px;}
 		</style>
 		<script type="text/javascript">
+
+			const els = { };
 			/*will try to do css later
 			function hover(){
 				alert("asf");
@@ -44,34 +46,43 @@
 						for(let i = 0; i < 10; ++i) {
 							added.push(diacritics[Math.floor(Math.random() * diacritics.length)]);
 						}
-						return `${added.join('')}${s}`;
+						return `${s}${added.join('')}`;
 					}).join('')
 				},
 				{
-				 name: 'click roll',
-				 convert: s=> "||̴̫̫̮̰̗̃̀̂̆N̶̨̠͈̮̬̭̱̋̆ë̱̼̖̘͇̯́̀̂̈́v̢̼̣̗̄̑̅̈̀ͅė̴̺͈̤̗͆̍́ͅr̵̡̲̪̼̓́̔̂̀|| ||̶̡̜̺̪͈̝͆́̆g̡̬̹̩̓͆͂̈̌̃ò̵̙̳͇̉͆̎̅̕n̶̴̨̯̄́̄͆̏̕ń̡̨̺̥̺̰̻̆ͅà̸̸͉̩̣͇̊́̀|| ||̺̻͉̗̥̦̇͂͂̈g̴̢̣͈̓́͆̌̄̄ï͉̱̙̬̐̌̎̂̕v̧̛̰̦̙̼̂̅͂ͅe̤̪̳̼̊̅̽̐̑̈́|| ||̶̧͇̯̠̺̄̈̊̚y̸̢̹̗̫̫̲̳̑̇ö̲̥͈̪̭̞̝́̄̕u̶̻̱̼̼̍̌͆̊̍|| ||̼̫̼̖̙̯́̊̽ͅû̢̨̮̩̪̬̺̅̒p̢̮̳̩̞̐̍͂̀̌|| ||̷̶̧̨̨̟̰́̀̊Ń̬̲̙̭̾̀̎̅̇e̫̣̫̮̫͇̿̎̓̀v̶̷̧̖̭̺́̊̊̚é̵̸̛̲̲̭̅̋͂r̴̨̻̹̂̿̊̍̊̓|| ||̘̤̹͉̺͂̀̀̽̿g̮̪̝̪̲̠̿̈̽̾ō̵̵̰̱̘̹̈̈́̃n̴̠̬̼̪̈́̈́̔ͅͅn̵̪̠̝̣̭̓̌̓̚a̹̺̔̇̈́̽̿̚ͅͅ|| ||̴̢̥̬̯̰̣̍̕̚l̺̗͈̘̘̰̯͆̀̌e̷̶̙̬̞̞̓̅̊̂t̷̙̱̲́̾̽̓́̌|| ||̴̡̗̰̟͈̆̋́̇y̰̖̪̻̺̑̏̉̀̚ơ̴̠̰̠̑̊͂̓́u̘̣̪̦̭̟̒̾́̕|| ||̟̤͈̯̙̍̓͆̉̾d̷̡͈̖̯̠̎̄͂̾ờ̷̢̦̘̣̠̰̄w̷̨͈̺̳̰̮̌̀̉ǹ̸̢̲̹̞̜̖̯̐|| ||̴̼̺̳̓̑̒̊̚̚Ň̸̨̥̳̞̜̉̓̄e̷̢̼̯̰̾̆̍̐̚v̧̛̻̣̓̔̍̿̑̕e̡̱̠̼̠̗̅̑̂̕r̨̡͉͈̟͂́̋̏̉|| ||̷̧̻̱̯̼̲̄̽ͅģ̤̲̯̳͉̫̺͆̂ö̘̠̞̼̺́̿̊̊̔ǹ̞̗̺̮̣̍͆́̎n̷̴̰̜̜̤̅̑̾̂a͇̲̞̜͉͆̔̌̽ͅ|| ||͈̯̟̟̳̂̍̋̓̅r̴̬̩̳̀̀̄̆̀̊u̴̦̞̯̬̰̐̔̓ͅn̢̨̛̮̻̎͂̎̄͂|| ||̞̪̣̟̜̫̖̈̀̎à͇̫̫̝̏̉̈̿̓r̡̨̙̞̻̱̝̻̓̌ỏ̷̢̻̞̹̆̽̋̽ȗ̴̧̱̞̩̤̻̅̃n̢̙̏́̅̾̓͂̐̕d̡̼̹̠̐̽̀̿̀̚|| ||̞͈̪̪̺̞̜̿̽̌ḁ̶̛̙͇̪̤̂̓̾ñ̷̡̟̟̙̦̫̪͂ḏ̡̘̠̳̓́̓̇̕|| ||̴̯̤̝̀̎̔̈̀ͅd̜̞̠̱̤͂̋̃́̕ḕ̠̺̗̝̯̮̋̈́s̡̧̖̱͇̮̓̋̌̓e̸̡̡̝̼̞̹̾̒̐r̖̪̯̞̫̦̀̐̔̀t̢̡̪̼̖̭̃̌̇̕|| ||̶̧̟̣͈̰̓́̀ͅy̧̨̲̪̱̽́̃̃̌ǭ̴̸̭̩̐̈́̿̂ù̸̫͉̥̣̲́̂̈|| ||̨̢̧̨̙̻̣̬̋̈Ṇ̸̨̼̺̹́̾̓̈́ȇ̶̙̥̞̌̾̉̽̇v̸̧̖̹̠̟͈͂̔̀ẹ̦̤̺̙̣̆̎ͅͅr̴̷̻̖̘̥̂̍̃̏|| ||̸̵̷̣̣̙̃̒́̾g̵̝̥̲̘̺̅̊̓̏o̷̡̧̲̪̮̍̈̈́̏ņ̸̧̺̻̩́̏́ͅn̵̴̷̬̮̏̓̄̈̔ấ̜͇̤̱̖̠͂̽|| ||̹̱̭̟̜̫̀̇̑ͅm̧̞̮̲̰̒̿̉̉̑a̱̣̫̩̐́̉̑̃̕k̷̢̖̻̦̃́̂̓̚é̸͈̫̠̠̠̫̃̅|| ||̼̼̣͉̫̫̓́̍̇ÿ̸̹̍̌̉̈̌̑̊ó̸̶̡̝̈̀̓̿̍u̴̴̢̬̟͇̓̏̇̈|| ||̶̨̨̻̰̪̫̓̅̽c̴̤̘̩̾̇̅̉͂̚r̨̦̹̱̐̊̓̈́́̕y̶̙̪̤̱̩̰̾̾̿|| ||̖̘̬͈̮̹̦̑̾̄N̵̠̣̝̬̼̹̈́̔̎ĕ̼̗̘̓̎̈́̋̌͆v̪̲̪̱̻̀̀̃́̚e̷̗͈̯̼̫̒̾̌̈́r̵̵̬̹̳̱̞̄̈́̚|| ||̵̧̨̥̦̱̮̓̓ͅğ̞̟̳̤̳̇̔̾̀ó̸̴̡̦̾́̽́ͅń͇͈̞̼̓̌̀̚̕ṉ̷̞̝̲̍̇̀̆̚a̶̷̯̠͉̅̈́̿̈́̾|| ||̷̷̳̥̺̊̓̈́̉̈́ş̦̻̯̩̆̔̀̾̕à̵̘̟̱̆̈̀̓̐y̶̢͉̗̰̖͈̅̌̐|| ||̷̢̗̳̦̾̀̆̂̓g̨̦̭̰̃̌̌̀͂̚ơ̡̭̖̱̮͂̈́̋̕ǫ̸̛̞̲̀́̐̐ͅd̬̭̲̼̰̽̀̈́̿̾b̼̺͇̙̀̀̉̅̓̍ŷ̫̱̹̾̎̂̔̋́è̙̬̱̝̹̥̆̈̉|| ||̴̛̩̪̌̇̕ͅͅͅN̷͈̖̳̄̔̈̿̀̒ȇ̪̙̯͈̙̇̆̔̑v͈̫̱̻̀̈́̉́́̚e̡̗̺̬̹̳̳͉͂̾r̵̵̢̨̨̩̰̲̈̉|| ||̨̞̣̲̗̲̤̈̆̌ǧ͉̩͉̤̔̾̈́̋̚o̵̡̢̮̼̜̻̔̑̄n̴̩̲͉͇̱͈̄̌̅n̡̨̖̞̻̓̊̂͆̀a̡̛̺̮̦̜̎̎̿̀|| ||̦̮̠̂́̀̿̏̈́̚t̠͉̩̯̳́̂̇̊̈́ȩ̝̥̝̑̈́̒̓̊̽l̷̶̨̛̙̓̾̒̑̚ĺ̶̢̛̛̤̥̝̗̦|| ||̡̦̝͇̒̎͂̏̐̑a̧̨̧͉̘̐̀̋̚̕|| ||̸̙̭̫̓̉̈̔̎͂l̨̨̡͉̞̣̳̑̂̃í̴̝̲̹́̑̀̉̓ȩ̷̸̗͂̒̋̾̾̓|| ||̸̡̣͈̓̉́̽̉̿a̸̶̫̟̹̖̠̎́̑n̗̠̝̮̈̇̓̅̆̚ḍ̒̏̔̾̿̏̆̚ͅ|| ||̶̧̱̒̒́̀̾͂ͅh̷̡͉̬͇̑̓̓̈̈ừ̸̷̢̨̠̺̫̫r̡̲̭̣̭̺̎̿̿̐ţ̴̴̝̲̲̲̮̼̚|| ||̶̧̣̥̯̻̜̌̇̉y̛̪̠̳̖̺̪̐̇̅ớ̴̡̦̖̬̎̕̚u||"
+
+					name: 'spaced',
+					convert: s => s.split('').map(s => `${s} `).join('')
+        			},
+        			{
+					name: 'click roll',
+					convert: s=> "||̴̫̫̮̰̗̃̀̂̆N̶̨̠͈̮̬̭̱̋̆ë̱̼̖̘͇̯́̀̂̈́v̢̼̣̗̄̑̅̈̀ͅė̴̺͈̤̗͆̍́ͅr̵̡̲̪̼̓́̔̂̀|| ||̶̡̜̺̪͈̝͆́̆g̡̬̹̩̓͆͂̈̌̃ò̵̙̳͇̉͆̎̅̕n̶̴̨̯̄́̄͆̏̕ń̡̨̺̥̺̰̻̆ͅà̸̸͉̩̣͇̊́̀|| ||̺̻͉̗̥̦̇͂͂̈g̴̢̣͈̓́͆̌̄̄ï͉̱̙̬̐̌̎̂̕v̧̛̰̦̙̼̂̅͂ͅe̤̪̳̼̊̅̽̐̑̈́|| ||̶̧͇̯̠̺̄̈̊̚y̸̢̹̗̫̫̲̳̑̇ö̲̥͈̪̭̞̝́̄̕u̶̻̱̼̼̍̌͆̊̍|| ||̼̫̼̖̙̯́̊̽ͅû̢̨̮̩̪̬̺̅̒p̢̮̳̩̞̐̍͂̀̌|| ||̷̶̧̨̨̟̰́̀̊Ń̬̲̙̭̾̀̎̅̇e̫̣̫̮̫͇̿̎̓̀v̶̷̧̖̭̺́̊̊̚é̵̸̛̲̲̭̅̋͂r̴̨̻̹̂̿̊̍̊̓|| ||̘̤̹͉̺͂̀̀̽̿g̮̪̝̪̲̠̿̈̽̾ō̵̵̰̱̘̹̈̈́̃n̴̠̬̼̪̈́̈́̔ͅͅn̵̪̠̝̣̭̓̌̓̚a̹̺̔̇̈́̽̿̚ͅͅ|| ||̴̢̥̬̯̰̣̍̕̚l̺̗͈̘̘̰̯͆̀̌e̷̶̙̬̞̞̓̅̊̂t̷̙̱̲́̾̽̓́̌|| ||̴̡̗̰̟͈̆̋́̇y̰̖̪̻̺̑̏̉̀̚ơ̴̠̰̠̑̊͂̓́u̘̣̪̦̭̟̒̾́̕|| ||̟̤͈̯̙̍̓͆̉̾d̷̡͈̖̯̠̎̄͂̾ờ̷̢̦̘̣̠̰̄w̷̨͈̺̳̰̮̌̀̉ǹ̸̢̲̹̞̜̖̯̐|| ||̴̼̺̳̓̑̒̊̚̚Ň̸̨̥̳̞̜̉̓̄e̷̢̼̯̰̾̆̍̐̚v̧̛̻̣̓̔̍̿̑̕e̡̱̠̼̠̗̅̑̂̕r̨̡͉͈̟͂́̋̏̉|| ||̷̧̻̱̯̼̲̄̽ͅģ̤̲̯̳͉̫̺͆̂ö̘̠̞̼̺́̿̊̊̔ǹ̞̗̺̮̣̍͆́̎n̷̴̰̜̜̤̅̑̾̂a͇̲̞̜͉͆̔̌̽ͅ|| ||͈̯̟̟̳̂̍̋̓̅r̴̬̩̳̀̀̄̆̀̊u̴̦̞̯̬̰̐̔̓ͅn̢̨̛̮̻̎͂̎̄͂|| ||̞̪̣̟̜̫̖̈̀̎à͇̫̫̝̏̉̈̿̓r̡̨̙̞̻̱̝̻̓̌ỏ̷̢̻̞̹̆̽̋̽ȗ̴̧̱̞̩̤̻̅̃n̢̙̏́̅̾̓͂̐̕d̡̼̹̠̐̽̀̿̀̚|| ||̞͈̪̪̺̞̜̿̽̌ḁ̶̛̙͇̪̤̂̓̾ñ̷̡̟̟̙̦̫̪͂ḏ̡̘̠̳̓́̓̇̕|| ||̴̯̤̝̀̎̔̈̀ͅd̜̞̠̱̤͂̋̃́̕ḕ̠̺̗̝̯̮̋̈́s̡̧̖̱͇̮̓̋̌̓e̸̡̡̝̼̞̹̾̒̐r̖̪̯̞̫̦̀̐̔̀t̢̡̪̼̖̭̃̌̇̕|| ||̶̧̟̣͈̰̓́̀ͅy̧̨̲̪̱̽́̃̃̌ǭ̴̸̭̩̐̈́̿̂ù̸̫͉̥̣̲́̂̈|| ||̨̢̧̨̙̻̣̬̋̈Ṇ̸̨̼̺̹́̾̓̈́ȇ̶̙̥̞̌̾̉̽̇v̸̧̖̹̠̟͈͂̔̀ẹ̦̤̺̙̣̆̎ͅͅr̴̷̻̖̘̥̂̍̃̏|| ||̸̵̷̣̣̙̃̒́̾g̵̝̥̲̘̺̅̊̓̏o̷̡̧̲̪̮̍̈̈́̏ņ̸̧̺̻̩́̏́ͅn̵̴̷̬̮̏̓̄̈̔ấ̜͇̤̱̖̠͂̽|| ||̹̱̭̟̜̫̀̇̑ͅm̧̞̮̲̰̒̿̉̉̑a̱̣̫̩̐́̉̑̃̕k̷̢̖̻̦̃́̂̓̚é̸͈̫̠̠̠̫̃̅|| ||̼̼̣͉̫̫̓́̍̇ÿ̸̹̍̌̉̈̌̑̊ó̸̶̡̝̈̀̓̿̍u̴̴̢̬̟͇̓̏̇̈|| ||̶̨̨̻̰̪̫̓̅̽c̴̤̘̩̾̇̅̉͂̚r̨̦̹̱̐̊̓̈́́̕y̶̙̪̤̱̩̰̾̾̿|| ||̖̘̬͈̮̹̦̑̾̄N̵̠̣̝̬̼̹̈́̔̎ĕ̼̗̘̓̎̈́̋̌͆v̪̲̪̱̻̀̀̃́̚e̷̗͈̯̼̫̒̾̌̈́r̵̵̬̹̳̱̞̄̈́̚|| ||̵̧̨̥̦̱̮̓̓ͅğ̞̟̳̤̳̇̔̾̀ó̸̴̡̦̾́̽́ͅń͇͈̞̼̓̌̀̚̕ṉ̷̞̝̲̍̇̀̆̚a̶̷̯̠͉̅̈́̿̈́̾|| ||̷̷̳̥̺̊̓̈́̉̈́ş̦̻̯̩̆̔̀̾̕à̵̘̟̱̆̈̀̓̐y̶̢͉̗̰̖͈̅̌̐|| ||̷̢̗̳̦̾̀̆̂̓g̨̦̭̰̃̌̌̀͂̚ơ̡̭̖̱̮͂̈́̋̕ǫ̸̛̞̲̀́̐̐ͅd̬̭̲̼̰̽̀̈́̿̾b̼̺͇̙̀̀̉̅̓̍ŷ̫̱̹̾̎̂̔̋́è̙̬̱̝̹̥̆̈̉|| ||̴̛̩̪̌̇̕ͅͅͅN̷͈̖̳̄̔̈̿̀̒ȇ̪̙̯͈̙̇̆̔̑v͈̫̱̻̀̈́̉́́̚e̡̗̺̬̹̳̳͉͂̾r̵̵̢̨̨̩̰̲̈̉|| ||̨̞̣̲̗̲̤̈̆̌ǧ͉̩͉̤̔̾̈́̋̚o̵̡̢̮̼̜̻̔̑̄n̴̩̲͉͇̱͈̄̌̅n̡̨̖̞̻̓̊̂͆̀a̡̛̺̮̦̜̎̎̿̀|| ||̦̮̠̂́̀̿̏̈́̚t̠͉̩̯̳́̂̇̊̈́ȩ̝̥̝̑̈́̒̓̊̽l̷̶̨̛̙̓̾̒̑̚ĺ̶̢̛̛̤̥̝̗̦|| ||̡̦̝͇̒̎͂̏̐̑a̧̨̧͉̘̐̀̋̚̕|| ||̸̙̭̫̓̉̈̔̎͂l̨̨̡͉̞̣̳̑̂̃í̴̝̲̹́̑̀̉̓ȩ̷̸̗͂̒̋̾̾̓|| ||̸̡̣͈̓̉́̽̉̿a̸̶̫̟̹̖̠̎́̑n̗̠̝̮̈̇̓̅̆̚ḍ̒̏̔̾̿̏̆̚ͅ|| ||̶̧̱̒̒́̀̾͂ͅh̷̡͉̬͇̑̓̓̈̈ừ̸̷̢̨̠̺̫̫r̡̲̭̣̭̺̎̿̿̐ţ̴̴̝̲̲̲̮̼̚|| ||̶̧̣̥̯̻̜̌̇̉y̛̪̠̳̖̺̪̐̇̅ớ̴̡̦̖̬̎̕̚u||",
 				}
 			];
 
 			let selectedConverter = 0;
 
-			// thanks to MrEgggga for making the code better
-			function convertText(kinput){
-				let sentence = document.getElementById("input1").value;
-				
+			// thanks to MrEgggga for making by code better :p
+			function convertText() {
+				const sentence = els.input.value;
+				let alertMsg = null;
 				if(sentence == ''&& converters[selectedConverter].name !== "click roll") {
-					document.getElementById("output").innerHTML="Please type something in the box.";
+					alertMsg = "Please type something in the box.";
 				}
-				else {
-					const converted = converters[selectedConverter].convert(sentence);
-					document.getElementById("output").innerHTML = converted;
+				const converted = converters[selectedConverter].convert(sentence);
+				const convertedCut = converted.slice(0, els.maxLen.value || Infinity);
+
+				if(converted != convertedCut) {
+					alertMsg = "Message was too long.";
 
 				}
+
+				els.output.innerHTML = convertedCut;
+				els.alerts.innerHTML = alertMsg || '';
 			}
 			function copyToClipboard() {
 				let converted = document.getElementById('output').textContent;
 				navigator.clipboard.writeText(converted);
-				
 			}
 		</script>
 	</head>
@@ -84,17 +95,23 @@
 			
 			<nobr>
 				<p>Put text here ↓</p>
-				<input id="input1" placeholder="input" type="text" <!--onkeydown='converttText(this)'--><br>
-				
+
+				<input id="input1" placeholder="input" type="text" onchange="convertText()"><br>
+				<input id="maxlen" placeholder="max length" type="number"><br>
 				<button onclick="convertText()"id="btn1">get output.</button>
 			</nobr>
-			<p>output: <span id="output"></span></p>
-			
-			<button id="copytxt" onclick="copyToClipboard()" onmouseover='hover()'>copy</button>
-			
-			<h6 id="bottom"><strong><em>we are not responsible for anything caused by the website</em></strong></h6>
-			<h6 id='bottom2'>credits: mintytoast, Mregggga</h6>
+		
+			<p>output: <span id="output"></span><span id="alert"></span></p>
+			<button id="copytxt" onclick="copyToClipboard()">copy</button>
+
+			<h6 id="disclaimer"><strong><em>we are not responsible for anything caused by the website</em></strong></h6>
+			<h6 id='credits'>credits: mintytoast, Mregggga</h6>
 			<script type="text/javascript">
+				els.input = document.getElementById("input1");
+				els.output = document.getElementById("output");
+				els.maxLen = document.getElementById("maxlen");
+				els.alerts = document.getElementById("alert");
+				els.buttonContainer = document.getElementById('conv-buttons');
 				const buttonContainer = document.getElementById('conv-buttons');
 				for(let i = 0; i < converters.length; ++i) {
 					const button = document.createElement('BUTTON');
@@ -102,7 +119,7 @@
 						selectedConverter = i;
 					});
 					button.textContent = converters[i].name;
-					buttonContainer.appendChild(button);
+					els.buttonContainer.appendChild(button);
 				}
 			</script>
 		</div>
