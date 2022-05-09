@@ -1,1 +1,3 @@
 link: https://tofutoast.github.io/annoying-discord-message/
+probably going to add stuff someday...
+Okay, I lied, "never" going to update
